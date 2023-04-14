@@ -16,6 +16,11 @@ class Handler implements URLHandler {
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("s")) {
+                    for(String s: ls){
+                        if(s.equals(parameters[1])){
+                            return("Keyword is already in the database");
+                        }
+                    }
                     ls.add(parameters[1]);
                     return (parameters[1] + " has been added to the keywords list");
                 }
@@ -25,7 +30,7 @@ class Handler implements URLHandler {
                 if (parameters[0].equals("s")) {
                     String r = "";
                     for(String s: ls){
-                        if(s.equals(parameters[1])){
+                        if(s.contains(parameters[1])){
                             r = r + s + "\n";
                         }
                     }
